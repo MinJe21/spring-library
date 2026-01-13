@@ -21,4 +21,7 @@ public class Member {
     private String feature;
     private String email;
     private String phoneNumber;
+
+    @OneToMany(mappedBy="member",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+    private List<Loan> loans;
 }

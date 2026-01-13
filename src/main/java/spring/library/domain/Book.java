@@ -3,6 +3,8 @@ package spring.library.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -21,5 +23,8 @@ public class Book {
     private String classification;
     private String status;
     private Long amount;
+
+    @OneToMany(mappedBy="book",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+    private List<Loan> loans;
 
 }

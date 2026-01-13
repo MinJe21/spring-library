@@ -3,7 +3,6 @@ package spring.library.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import spring.library.dto.BookDto;
-import spring.library.dto.MemberDto;
 import spring.library.service.BookService;
 
 import java.util.List;
