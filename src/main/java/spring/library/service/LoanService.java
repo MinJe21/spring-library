@@ -1,5 +1,6 @@
 package spring.library.service;
 
+import jakarta.transaction.Transactional;
 import lombok.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,5 +75,28 @@ public class LoanService {
     public List<LoanDto.DetailResDto> detailHistoryList(Long memberId) {
         Member m =  memberRepository.findById(memberId).orElseThrow();
         return m.getLoans().stream().map(LoanDto.DetailResDto::from).toList();
+    }
+
+    @Transactional
+    public void returnBook(Long bookId, Long memberId) {
+        bookRepository.findById(bookId).orElseThrow();
+        memberRepository.findById(memberId).orElseThrow();
+
+        Loan l = loanRepository.findByBookIdAndMemberId(bookId, memberId).orElseThrow();
+        l.setReturned(true);
+        loanRepository.save(l);
+    }
+
+    @Transactional
+    public void renewalBook(Long bookId, Long memberId) {
+        bookRepository.findById(bookId).orElseThrow();
+        memberRepository.findById(memberId).orElseThrow();
+
+        Loan l =  loanRepository.findByBookIdAndMemberId(bookId, memberId).orElseThrow();
+        if(!l.isReturned() && l.getDueDate().isEqual(LocalDate.now()) && l.getRenewalCount()==0) {
+            l.setRenewalCount(1);
+            l.setDueDate(l.getDueDate().plusDays(5));
+            loanRepository.save(l);
+        }
     }
 }

@@ -27,4 +27,14 @@ public class LoanController {
     public List<LoanDto.DetailResDto> detailHistoryList(@RequestParam Long memberId) {
         return loanService.detailHistoryList(memberId);
     }
+
+    @PutMapping("/book/{bookId}/return")
+    public void returnBook(@PathVariable Long bookId, @RequestParam Long memberId) {
+        loanService.returnBook(bookId, memberId);
+    }
+
+    @PutMapping("/book/{bookId}/renewal")
+    public void renewalBook(@PathVariable Long bookId, @RequestParam Long memberId) {
+        loanService.renewalBook(bookId, memberId);
+    }
 }
