@@ -3,7 +3,6 @@ package spring.library.service;
 import jakarta.transaction.Transactional;
 import lombok.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import spring.library.domain.Book;
 import spring.library.domain.Loan;
 import spring.library.domain.Member;

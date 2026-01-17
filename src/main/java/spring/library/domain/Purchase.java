@@ -11,21 +11,23 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-public class Loan {
+public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate loanDate;
-    private LocalDate dueDate;
-    private int renewalCount;
-    private boolean isReturned;
+    private String title;
+    private String author;
+    private String publisher;
+    private int publicationYear;
+
+    private Long purchaseRequestCount;
+    private LocalDate requestDate;
+    private LocalDate dateOfProgress;
+    private String processResult;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
-    private Book book;
-}
+ }
